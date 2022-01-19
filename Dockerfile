@@ -3,9 +3,12 @@ FROM opensciencegrid/software-base:3.6-el7-release
 RUN yum -y upgrade && \
     yum -y install \
       condor \
+      curl \
       git \
       lsof \
+      rrdtool \
       vim \
+      wget \
     && \
     yum clean all
 
@@ -16,4 +19,6 @@ RUN chmod 755 /usr/sbin/condor_master_wrapper
 COPY supervisord.conf /etc/supervisord.conf
 
 COPY 10-htcondor.conf /etc/supervisord.d/
+
+COPY ospool-overview /opt/ospool-overview
 
