@@ -148,7 +148,7 @@ tac /var/log/condor/NegotiatorLog \
 
 # site stats
 mkdir -p data/sites
-condor_status -l | grep '^GLIDEIN_ResourceName' | sed 's/.*= "//' | sed 's/"//g' | sed 's/ //g' | sort | uniq -c >data/sites/current.txt
+condor_status -af GLIDEIN_ResourceName | sed 's/.*= "//' | sed 's/"//g' | sed 's/ //g' | sort | uniq -c >data/sites/current.txt
 while read COUNT SITE
 do
     echo "$SITE"
@@ -160,7 +160,7 @@ do
             RRA:AVERAGE:0.5:1:8928 \
             RRA:AVERAGE:0.5:12:8760
     fi
-    CMD="rrdtool update \"$RRD\" N:$COUNT"
+    CMD="rrdtool update $RRD N:$COUNT"
     echo $CMD
     $CMD
 done < data/sites/current.txt

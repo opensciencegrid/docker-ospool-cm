@@ -15,6 +15,8 @@ touch .cron.lock
 
 mkdir -p data
 
+./utils/condor-stats
+
 # straight downloads
 for pair in \
     "https://stash.osgconnect.net/public/rynge/monitoring/login04/htcondor-user-stats.html data/login04-report.php" \
